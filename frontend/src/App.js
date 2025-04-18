@@ -46,7 +46,7 @@ export default function App() {
   // Auth state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loginPassword, setLoginPassword] = useState("");
-  const [userRole, setUserRole] = useState("scientist"); // null | "scientist" | "observer"
+  const [userRole, setUserRole] = useState(null); // null | "scientist" | "observer"
 
   // Error handling state
   const [notification, setNotification] = useState({

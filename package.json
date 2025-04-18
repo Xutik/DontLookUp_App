@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:backend": "cd backend && npm ci",
-    "install:frontend": "cd frontend && npm ci",
-    "install": "npm run install:backend && npm run install:frontend",
+    "setup:backend": "cd backend && npm i",
+    "setup:frontend": "cd frontend && npm i",
+    "setup": "concurrently \"npm run setup:backend\" \"npm run setup:frontend\"",
     "start:frontend": "cd frontend && npm run start",
     "start:backend": "cd backend && npm run start",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
