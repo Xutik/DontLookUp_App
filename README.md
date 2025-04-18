@@ -41,3 +41,4 @@ Vulnerabilities:
 - Browser API Access: Potential unauthorized usage (mitigation: token/cookie authentication)
 - DDoS Risk: No current rate-limiting
 - Login Bypass: Modal window vulnerable to DevTools manipulation
+- login info should be stored in secure place

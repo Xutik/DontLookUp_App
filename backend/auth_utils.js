@@ -18,14 +18,3 @@ export const initAuth = async () => {
     { role: "observer", hash: observerHashedPassword },
   ];
 };
-
-// Verify password against user hashes
-export const verifyPassword = async (password, users) => {
-  for (const user of users) {
-    const match = await bcrypt.compare(password, user.hash);
-    if (match) {
-      return { authenticated: true, role: user.role };
-    }
-  }
-  return { authenticated: false };
-};
