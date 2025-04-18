@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# How to start project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Install dependencies in the root: npm ci
+2. Install dependencies of the React server and the Express server: npm run install
+3. Start the React server and the Express server: npm run start
 
-## Available Scripts
+Prettier
+npx prettier --write .
 
-In the project directory, you can run:
+# About the project
 
-### `npm start`
+DB Mongo is stored in a separate repo. Data is stored in the "Collision" collection, consists of 2 datasets (from 2 APIs https://ssd-api.jpl.nasa.gov/doc/cad.html - main data for small bodies and https://ssd-api.jpl.nasa.gov/doc/sentry.html - to enrich data with risk estimation and diameter estimation), contains test samples and actual data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Front
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Modal window with password input allows 2 types of users with different permissions (view - password "observer" / view and edit - password "scientist"). App contains viewport for data visualisation and control panel to search and edit data, data table. Front calls endpoints to manipulate / get data. For safety of data: validation and limitations of input, isEditable attribute. Notification for errors (of user and server) and sucessful actions. Pagination in the table is used for UX and performance, decrease backend server load.
+SEO: added meta data in index.html; a11y: semantics markup, aria-attributes, contrast, tested on LightHouse devTools. Contrasts checked with Colour contrast checker extension. Added Google tag for tracking (example.com) for testing analytics. Tracking of number of searches added on console.log.
 
-### `npm test`
+# Back
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Back connects to MongoDB to get / change data through endpoints.
+API handles user permissions and data from database. Verbs: put (edit), delete, post (create), get. Success and error catch in repsonses.
 
-### `npm run build`
+### Handling Threats:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Authorisation to handle safe data manipulations (roles for users)
+- Validation of data from user to ensure data is full to add to dataset.
+- Configured CORS for localhost:3000 Only
+- MongoDB client sanitises data. Next step would be validation middleware for regex.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Vulnerabilities:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- No validation of deleting on backend
+- API is accessed via browser, which creats threat of unauthoirised access (this could be mitigated with tokens, authentification or/ and cookie-files)
