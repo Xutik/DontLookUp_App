@@ -6,7 +6,6 @@ import { DataEntrySection, DataSection, Footer, Header, LoginModal, Notification
 
 // Main App Component
 export default function App() {
-  // State for paginated data
   const [paginatedData, setPaginatedData] = useState({
     data: [],
     metadata: {
@@ -20,18 +19,15 @@ export default function App() {
     },
   });
 
-  // Page state
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  // Search state
   const [searchQuery, setSearchQuery] = useState("");
   const [searchCount, setSearchCount] = useState(0);
   // console.log("searchCount", searchCount);
 
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
 
-  // Other state variables
   const [action, setAction] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -55,7 +51,6 @@ export default function App() {
     message: "",
   });
 
-  // Function to show notification
   const showNotification = (type, message) => {
     setNotification({
       show: true,
@@ -63,7 +58,6 @@ export default function App() {
       message,
     });
 
-    // Auto-dismiss after 5 seconds
     setTimeout(() => {
       setNotification({
         show: false,
@@ -90,7 +84,7 @@ export default function App() {
     const timer = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
       setCurrentPage(1); // Reset to first page when search changes
-    }, 300); // 300ms delay
+    }, 300); 
 
     return () => clearTimeout(timer);
   }, [searchQuery]);
@@ -149,7 +143,6 @@ export default function App() {
       fetchPaginatedObjects(currentPage, itemsPerPage, debouncedSearchQuery);
     } catch (error) {
       console.error("Error handling form submission:", error);
-      // Extract error message
       let errorMessage = "An unexpected error occurred.";
       if (error.message) {
         errorMessage = error.message;
@@ -157,7 +150,6 @@ export default function App() {
         errorMessage = error;
       }
 
-      // Show more specific error based on operation
       if (action === "ADD") {
         showNotification("error", `Failed to create space object: ${errorMessage}`);
       } else {
@@ -255,7 +247,6 @@ export default function App() {
     setLoginPassword("");
   };
 
-  // temporary hide for testing purpose
   useEffect(() => {
     openModal();
   }, []);
