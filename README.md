@@ -1,7 +1,7 @@
 # How to Start the Project
 
-1. Install dependencies in the root: npm i
-2. Install dependencies of the React server and the Express server: npm run setup
+1. Install dependencies of the React server and the Express server, and in the root: npm i
+2. If you use cloud MongoDB Atlas, add your URI to backend/.env
 3. Start the React server and the Express server: npm run start
 
 Format code with Prettier: npx prettier --write .
@@ -11,7 +11,6 @@ MongoDB is stored in a separate repository (https://github.com/Xutik/DontLookUp_
 Primary data from small bodies (via NASA's CAD API)
 Enriched data with risk/diameter estimates (via Sentry API)
 The collection contains both test samples and actual data.
-(If you use cloud MongoDB, add your URI to backend/.env)
 
 # Frontend
 A modal window with password authentication enables two user types:
