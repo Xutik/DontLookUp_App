@@ -46,4 +46,4 @@ There are definitely some privacy concerns:
 2. No User Consent: Users have no idea their data is being collected, and there's no way for them to opt out. This is probably not great from a GDPR perspective.
 
 ### What Should Be Fixed: 
-- Add a cookie banner so people know what's happening - Give users an option to disable trackin
+- Add a cookie banner so people know what's happening - Give users an option to disable tracking
